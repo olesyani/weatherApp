@@ -11,6 +11,7 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var mainStack: UIStackView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -21,6 +22,14 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.mainStack.setCustomSpacing(90.0, after: self.dateLabel)
+        
+        self.dateLabel.textDropShadow()
+        self.cityLabel.textDropShadow()
+        //self.cityLabel.baselineAdjustment = .alignBaselines
+        self.temperatureLabel.textDropShadow()
+        
         self.showTemperature()
     }
     
@@ -83,8 +92,21 @@ class WeatherViewController: UIViewController {
                     print(jsonError)
                 }
             }.resume()
-        
     }
-    
-    
+}
+
+extension UILabel {
+    func textDropShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.systemGray5.cgColor
+        self.layer.shadowRadius = 3.0
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOffset = CGSize(width: 2.5, height: 2.5)
+    }
+
+    static func createCustomLabel() -> UILabel {
+        let label = UILabel()
+        label.textDropShadow()
+        return label
+    }
 }
