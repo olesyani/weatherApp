@@ -61,7 +61,7 @@ class SignInViewController: UIViewController {
         if Auth.auth().currentUser != nil {
             print(Auth.auth().currentUser?.uid)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(identifier: "success")
+            let vc = storyboard.instantiateViewController(identifier: "forecast")
             vc.modalPresentationStyle = .overFullScreen
             self.present(vc, animated: true)
         }
